@@ -50,7 +50,7 @@
               
               <div v-for="(res, index) in responder" :key="index" style="width: 100%">
                 <CheckboxGroup v-model="form.checkbox">
-                  <Checkbox :label="res.id" :value="res.fullName"></Checkbox>
+                  <Checkbox :label="res.id">{{res.fullName}}</Checkbox>
                 </CheckboxGroup>
               </div>
             </Form>
