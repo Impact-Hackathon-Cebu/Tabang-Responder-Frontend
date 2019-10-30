@@ -66,7 +66,7 @@
 
 <script>
 
-import {getResponderById, getReports, sendResponder} from '../services/report'
+import {getAllResponder, getReports, sendResponder} from '../services/report'
 import Map from '@/components/Map.vue';
 
 export default {
@@ -91,23 +91,22 @@ export default {
     console.log(this.form);
   },
   methods: {
-    getCurrentResponder() {
-      getResponderById((err, result) => {
-        console.log("Callback: ", result)
+    getAllResponder() {
+      getAllResponder((err, result) => {
+        console.log("Responders: ", result)
         this.responder = result;
       })
     },
     getAllReports() {
-      getReports((err, result) => {
-        console.log("Callback result: ", result)
+      getReports((err, result) => {        
         this.report = result;
       })
     },
     send(){
       let data = {check: this.form.checkbox, id: this.current.reportReference}
       console.log(data)
-      sendResponder((data)  => {
-        console.log("hi ")
+      sendResponder((data), (error, cb)  => {
+        console.log("zzzzzz")
       })
     },
     currentRep(rep){
@@ -121,7 +120,7 @@ export default {
   },
   mounted() {
     this.getAllReports()
-    this.getCurrentResponder();
+    this.getAllResponder();
   }
 };
 </script>

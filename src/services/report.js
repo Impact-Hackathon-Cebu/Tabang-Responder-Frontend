@@ -1,6 +1,6 @@
 import {db} from './firebase'
 
-export const getResponderById = (cb) => {
+export const getAllResponder = (cb) => {
     return new Promise(function (resolve) {
         var query = db.collection("responders")
         query.onSnapshot((querySnapshot) => {
@@ -17,18 +17,18 @@ export const getResponderById = (cb) => {
     })
 };
 
-export const sendResponder = (cb, form) => {
-    console.log('form', form)
-    // db.collection("responders")
-    //     query.onSnapshot((querySnapshot) => {
-    //         const reports = []
-    //         querySnapshot.forEach(doc => {
-                
-    //             doc.collection("reports").add({reportReference: form.id})
-
-    //         })
-    //         cb(null, reports)
-    //     })
+export const sendResponder = (data, cb) => {    
+    data.check.forEach( uid => {        
+        db.collection("responders").doc(uid).collection("reports").add({
+            "reportReference": db.doc(data.id)
+        }).then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+    })
+    
 }
 
 export const getReports = (cb) => {
