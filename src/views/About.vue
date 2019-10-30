@@ -42,7 +42,7 @@
       </i-col>
 
       <i-col :xs="5" :md="5" :lg="5" v-if="show">
-        <div v-if="initial">
+        <div v-show="initial">
           <h2>Near correspondants</h2>
 
           <div class="cor-wrapper">
@@ -59,6 +59,10 @@
 
           <Button type="success" long @click="send">Send Respondents</Button>
         </div>
+        <div v-show="!initial">
+          <h2>Status</h2>
+          <Status/>
+        </div>
       </i-col>
     </Row>
   </div>
@@ -68,6 +72,7 @@
 
 import {getAllResponder, getReports, sendResponder} from '../services/report'
 import Map from '@/components/Map.vue';
+import Status from '@/components/Status.vue';
 
 export default {
   data() {
@@ -85,7 +90,7 @@ export default {
     };
   },
   components: {
-    Map
+    Map, Status
   },
   updated () {
     console.log(this.form);
@@ -108,10 +113,12 @@ export default {
       sendResponder((data), (error, cb)  => {
         console.log("zzzzzz")
       })
+      this.initial = false;
     },
     currentRep(rep){
       this.current = rep;
       this.show = true;
+      this.initial = true;
       console.log(this.current)
     },
     currentResponder(){
@@ -134,6 +141,9 @@ export default {
 }
 h2 {
   padding: 10px;
+}
+h3{
+  padding-top: 8px;
 }
 .cor-wrapper {
   height: 70vh;

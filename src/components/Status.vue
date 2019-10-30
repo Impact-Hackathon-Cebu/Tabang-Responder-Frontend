@@ -3,7 +3,7 @@
         <TimelineItem>
             <Icon type="ios-checkmark-circle" slot="dot"/>
             <p class="time">Notified the respondent</p>
-            <p class="content">Respondent name</p>
+            <!-- <p class="content">Respondent name</p> -->
         </TimelineItem>
         <TimelineItem>
             <p class="time">Respondent accepted</p>
