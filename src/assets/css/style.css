@@ -1,0 +1,55 @@
+body{
+
+    background-color: #f7f2f2;
+}
+
+h1{
+    margin: 15px;
+}
+
+h2{
+    margin: 15px;
+}
+
+.container{
+    border: 1px solid #f9f9f9;
+    background-color: #fff;
+    height: 100vh;
+    border-radius: 3px;
+}
+
+.dashboard-section h3{
+    margin: 13px;
+    background-color: #fff;
+}
+
+.new{
+    padding: 10px;
+    text-align: center;
+    height: 90vh;
+    overflow: auto;
+}
+
+.card-new{
+    border: 1px solid #e0e0e0;
+    margin: 5px;
+}
+
+.card-new .title{
+    text-align: left;
+}
+
+.card-new .title h4{
+    /* font-size: 13px; */
+    margin-bottom: 5px;
+}
+
+/* p.type-barangay{
+    color: lime;
+} */
+
+.detail-wrapper{
+    text-align: left;
+}
+
+/* AIzaSyB2y4s80KbQU868pCaNnHeQ7EPXaCvBxuw */

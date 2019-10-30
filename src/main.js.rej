@@ -1,0 +1,6 @@
+diff a/src/main.js b/src/main.js	(rejected hunks)
+@@ -47,2 +47,2 @@ Vue.use(VueGoogleMaps, {
+-  },
+- 
++  }
++
