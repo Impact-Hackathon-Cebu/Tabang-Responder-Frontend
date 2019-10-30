@@ -75,6 +75,10 @@
 </template>
 
 <script>
+
+import {getResponderById, getReports} from '../services/report'
+
+
 export default {
   data() {
     return {
@@ -83,8 +87,21 @@ export default {
       initial: true
     };
   },
-  methods: {
-    send() {}
+  methods: {    
+    getCurrentResponder() {
+      getResponderById("U85Obd8cEmvvBuoXruwa").then(user => {
+        console.log("Callback: ", user)
+      })
+    },
+    getAllReports() {
+      getReports((err, result) => {
+        console.log("Callback result: ", result)
+      })
+    },
+    send(){}    
+  },
+  mounted() {
+    this.getAllReports()
   }
 };
 </script>
