@@ -1,21 +1,20 @@
 <template>
   <div>
-    <div class="google-map" ref="googleMap"></div>
+    <div class="google-map" ref="googleMap">
+        <GmapMarker ref="myMarker"
+    :position="google && new google.maps.LatLng(1.38, 103.8)" />
+    </div>
   </div>
 </template>
 
 <script>
+import {gmapApi} from 'vue2-google-maps'
+ 
 export default {
-  mounted() {
-    // At this point, the child GmapMap has been mounted, but
-    // its map has not been initialized.
-    // Therefore we need to write mapRef.$mapPromise.then(() => ...)
-
-    this.$refs.mapRef.$mapPromise.then(map => {
-      map.panTo({ lat: 1.38, lng: 103.8 });
-    });
+  computed: {
+    google: gmapApi
   }
-};
+}
 </script>
 
 <style></style>
