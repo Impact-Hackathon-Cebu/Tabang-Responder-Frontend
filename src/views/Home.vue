@@ -141,7 +141,7 @@
         <h3>Help is on the way</h3>
 
         <div class="new">
-           
+           <Status></Status>
         </div>
       </div>
     </i-col>

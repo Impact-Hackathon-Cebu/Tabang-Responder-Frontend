@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: 0 -10px;">
+  <div style="margin: 0 10px;">
     <h1>Tabang</h1>
 
     <Row class="container" :gutter="20">
@@ -10,21 +10,21 @@
           style="height: 100vh; overflow: auto;"
         >
           <MenuGroup title="Emergencies">
-            <MenuItem name="1">
-              <h3>Heart Attack</h3>
-              <p>Sugbo Mercado</p>
-              <p>00:00</p>
+            <MenuItem :name="i" v-for="(rep,i) in report" :key="i" @click.native="currentRep(rep)">
+              <h3>{{rep.desc}}</h3>
+              <!-- <p>Sugbo Mercado</p> -->
+              <p>{{rep.time}}</p>
             </MenuItem>
-            <MenuItem name="2">
+            <!-- <MenuItem name="2">
               <h3>Fever</h3>
               <p>Sudlon, Lahug</p>
               <p>00:001</p>
-            </MenuItem>
+            </MenuItem> -->
           </MenuGroup>
         </Menu>
       </i-col>
 
-      <i-col :xs="14" :md="14" :lg="14" class="detail-wrapper">
+      <i-col :xs="14" :md="14" :lg="14" class="detail-wrapper" v-if="show">
         <h3>Name:</h3>
         <p>John Doe</p>
         <h3>Phone #:</h3>
@@ -32,39 +32,29 @@
         <h3>Address:</h3>
         <p>Sugbo Mercado</p>
 
-        <div id="map"></div>
+        <!-- <div id="map"></div> -->
+        <Map></Map>
 
         <h3>Details:</h3>
         <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. A facilis
-          aliquam, suscipit obcaecati, rerum eius sunt exercitationem
-          consequatur possimus, ex minus asperiores perferendis dolorem
-          excepturi praesentium quasi placeat maxime animi!
+          {{current.desc}}
         </p>
       </i-col>
-      <i-col :xs="5" :md="5" :lg="5">
+
+      <i-col :xs="5" :md="5" :lg="5" v-if="show">
         <div v-if="initial">
           <h2>Near correspondants</h2>
 
           <div class="cor-wrapper">
-            <ul>
-              <li>
-                <Checkbox v-model="cor1">
-                  <div class="inline">
-                    <h3>John doe</h3>
-                    <p>Contact #</p>
-                  </div>
-                </Checkbox>
-              </li>
-              <li>
-                <Checkbox v-model="cor2">
-                  <div class="inline">
-                    <h3>John doe</h3>
-                    <p>Contact #</p>
-                  </div>
-                </Checkbox>
-              </li>
-            </ul>
+            <Form :model="form">
+              
+              <div v-for="(res, index) in responder" :key="index" style="width: 100%">
+                <CheckboxGroup v-model="form.checkbox">
+                  <Checkbox :label="res.id" :value="res.fullName"></Checkbox>
+                </CheckboxGroup>
+              </div>
+            </Form>
+            
           </div>
 
           <Button type="success" long @click="send">Send Respondents</Button>
@@ -76,32 +66,62 @@
 
 <script>
 
-import {getResponderById, getReports} from '../services/report'
-
+import {getResponderById, getReports, sendResponder} from '../services/report'
+import Map from '@/components/Map.vue';
 
 export default {
   data() {
     return {
-      cor1: false,
-      cor2: false,
-      initial: true
+      
+      initial: true,
+      report: '',
+      current: {},
+      show: false,
+      responder: {},
+      form: {
+        checkbox: [],
+        
+      },
     };
   },
-  methods: {    
+  components: {
+    Map
+  },
+  updated () {
+    console.log(this.form);
+  },
+  methods: {
     getCurrentResponder() {
-      getResponderById("U85Obd8cEmvvBuoXruwa").then(user => {
-        console.log("Callback: ", user)
+      getResponderById((err, result) => {
+        console.log("Callback: ", result)
+        this.responder = result;
       })
     },
     getAllReports() {
       getReports((err, result) => {
         console.log("Callback result: ", result)
+        this.report = result;
       })
     },
-    send(){}    
+    send(){
+      let data = {check: this.form.checkbox, id: this.current.reportReference}
+      console.log(data)
+      sendResponder((data)  => {
+        console.log("hi ")
+      })
+    },
+    currentRep(rep){
+      this.current = rep;
+      this.show = true;
+      console.log(this.current)
+    },
+    currentResponder(){
+
+    }
   },
   mounted() {
     this.getAllReports()
+    this.getCurrentResponder();
   }
 };
 </script>
