@@ -7,26 +7,27 @@ import ViewUI from "view-design";
 import "view-design/dist/styles/iview.css";
 import "./assets/css/style.css";
 
-import * as firebase from "firebase/app";
-import "firebase/firestore";
+// import * as firebase from "firebase/app";
+// import "firebase/firestore";
+// import {db} from './services/base'
 import * as VueGoogleMaps from "vue2-google-maps";
 
-require("firebase/firestore");
+// require("firebase/firestore");
 
-var firebaseConfig = {
-  apiKey: "AIzaSyBGgh3wf2Se2jdSXA8vjc-u39v7RiwpgVI",
-  authDomain: "smart-tanod.firebaseapp.com",
-  databaseURL: "https://smart-tanod.firebaseio.com",
-  projectId: "smart-tanod",
-  storageBucket: "smart-tanod.appspot.com",
-  messagingSenderId: "297914828740",
-  appId: "1:297914828740:web:6752bfcd03082ca88b8691",
-  measurementId: "G-4T27MXYSGW"
-};
+// var firebaseConfig = {
+//   apiKey: "AIzaSyBGgh3wf2Se2jdSXA8vjc-u39v7RiwpgVI",
+//   authDomain: "smart-tanod.firebaseapp.com",
+//   databaseURL: "https://smart-tanod.firebaseio.com",
+//   projectId: "smart-tanod",
+//   storageBucket: "smart-tanod.appspot.com",
+//   messagingSenderId: "297914828740",
+//   appId: "1:297914828740:web:6752bfcd03082ca88b8691",
+//   measurementId: "G-4T27MXYSGW"
+// };
 
-// Initialize Firebase
-export const firebaseApp = firebase.initializeApp(firebaseConfig);
-export const db = firebaseApp.firestore();
+// // Initialize Firebase
+// export const firebaseApp = firebase.initializeApp(firebaseConfig);
+// export const db = firebaseApp.firestore();
 
 Vue.use(VueGoogleMaps, {
   load: {
